@@ -1,0 +1,123 @@
+.mypage .mypage_wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 50px;
+    border-radius: 5px;
+  box-shadow: 1px 1px 10px 3px #eee;
+  overflow: hidden;
+}
+.mypage .mypage_wrap .left{
+    width: 30%;
+    float: left;
+    height: 400px;
+    text-align: center;
+    position: relative;
+}
+.mypage .mypage_wrap .left::after{
+    content: "";
+    position: absolute;
+    width: 1px;
+    background-color: #ddd;
+    height: 80%;
+    top: 10%;
+    right: 0;
+}
+.mypage .mypage_wrap .left .main_img{
+    width: 200px;
+    height: 200px;
+    background-color: #eee;
+    border-radius: 50%;
+    background-size: cover;
+    margin: 50px auto;
+    position: relative;
+}
+.mypage .mypage_wrap .right{
+    height: 400px;
+    padding: 50px;
+    position: relative;
+    width: 70%;
+    float: right;
+}
+.mypage .mypage_wrap .right p{
+    display: inline-block;
+    margin-top: 80px;
+    position: relative;
+    width: 100px;
+}
+.mypage .mypage_wrap .right p::after{
+    content: "";
+    position: absolute;
+    width: 2px;
+    background-color: salmon;
+    height: 100%;
+    top: 0;
+    left: 60px;
+}
+.mypage .mypage_wrap .right span{
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    margin-top: 80px;
+    padding-bottom: 5px;
+    width: 300px;
+}
+.mypage .mypage_wrap .right .up{
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: salmon;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+}
+.mypage.update .mypage_wrap .left input{
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+}
+.mypage.update .mypage_wrap .left .main_img .add{
+    width: 50px;
+    height: 50px;
+    background-color: #999;
+    position: absolute;
+    background-size: 50%;
+    opacity: .5;
+    left: 50%;
+    cursor: pointer;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background-image: url('../images/camera.png');
+}
+.mypage.update .mypage_wrap .left .main_img .add label{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: block;
+}
+.mypage.update .mypage_wrap .left .upimg{
+    display: none;
+}
+.mypage.update .mypage_wrap .left .button_wrap{
+    width: 100%;
+    position: absolute;
+    top: 260px;
+}
+.mypage.update .mypage_wrap .left button{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 0 10px;
+}
+.mypage.update .mypage_wrap .right textarea{
+    width: 300px;
+    top: 10px;
+    position: relative;
+}

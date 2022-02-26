@@ -1,0 +1,12 @@
+.home .home_wrap{
+    max-width: 1200px;
+    display: flex;
+    margin: 0 auto;
+}
+.home .home_wrap .item_box{
+    background-color: #eee;
+    width: 25%;
+    height: 200px;
+    margin: 10px;
+    text-align: center;
+}
