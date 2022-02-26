@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/mini_shopping/static/css/main.96a7004f.css",
+    "main.js": "/mini_shopping/static/js/main.937a2f14.js",
+    "static/js/787.28cb0dcd.chunk.js": "/mini_shopping/static/js/787.28cb0dcd.chunk.js",
+    "static/media/camera.png": "/mini_shopping/static/media/camera.5cd5751725414afe6129.png",
+    "index.html": "/mini_shopping/index.html",
+    "main.96a7004f.css.map": "/mini_shopping/static/css/main.96a7004f.css.map",
+    "main.937a2f14.js.map": "/mini_shopping/static/js/main.937a2f14.js.map",
+    "787.28cb0dcd.chunk.js.map": "/mini_shopping/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96a7004f.css",
+    "static/js/main.937a2f14.js"
+  ]
+}
