@@ -48,6 +48,11 @@
   background-color: #999;
   border-radius: 50%;
   position: relative;
+  overflow: hidden;
+}
+.app .header .header_wrap .user .user_img>a>img{
+  /* width: 30px; */
+  height: 100%;
 }
 .app .header .header_wrap .user .user_img .sub{
   width: 100px;
@@ -59,8 +64,12 @@
   padding: 20px;
   top: 40px;
   z-index: 99;
+  display: none;
   box-shadow: 1px 1px 10px 3px #eee;
   right: 0;
+}
+.app .header .header_wrap .user .user_img .sub.show{
+  display: block;
 }
 .app .header .header_wrap .user .user_img .sub li:hover{
   text-decoration: underline;

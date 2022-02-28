@@ -10,7 +10,7 @@ function Home() {
       ]);
       const item_list=item.map(
           (data)=>(<div className="item_box"><div className="img"><img src={data.url}/>
-          <p className="title">{data.title}</p><p className="price">{data.price}</p></div></div>)
+          <p className="title">{data.title}</p><p className="price">{data.price}</p><button></button></div></div>)
       )
   return (
     <div className="home">

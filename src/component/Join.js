@@ -9,7 +9,7 @@ function Join() {
     const [passwordText,setPasswordText]=useState(false)
     const [passwordCheck ,setPasswordCheck]=useState('')
     const [passwordCheckText,setPasswordCheckText]=useState(false)
-
+    const dbService = firebaseInstance.firestore();
 
     const onFinish = async () => {
         if(password!==passwordCheck){
@@ -18,6 +18,14 @@ function Join() {
         // else if(email==user){}
         try {
             const user = await createUserWithEmailAndPassword(auth,email,password);
+            await dbService.collection('user').doc(user.user.uid).set({
+                name: "user",
+                createdAt: Date.now(),
+                userImg: "", 
+                comment:"안녕하세요.",
+                email:email,
+                user_uid:user.user.uid
+            });
             alert("succes")
             window.location.hash="/"
             console.log(user);
@@ -63,10 +71,10 @@ function Join() {
                 <input type="text" name='email' onChange={JoinEmail}></input>
                 {EmailText?<p className="text">{EmailText}</p>:<></>}
                 <span>비밀번호</span>
-                <input type="text" name='password' onChange={JoinPw}></input>
+                <input type="password" name='password' onChange={JoinPw}></input>
                 {passwordText?<p className="text">{passwordText}</p>:<></>}
                 <span>비밀번호확인</span>
-                <input type="text" name='passwordCheck' onChange={JoinCheckPw}></input>
+                <input type="password" name='passwordCheck' onChange={JoinCheckPw}></input>
                 {passwordCheckText?<p className="text">{passwordCheckText}</p>:<></>}
                 <button className='join_btn' onClick={onFinish}>가입</button>
             </div>

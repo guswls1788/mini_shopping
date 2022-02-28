@@ -22,21 +22,29 @@
     top: 10%;
     right: 0;
 }
-.mypage .mypage_wrap .left .main_img{
+.mypage .mypage_wrap .left .img_wrap{
     width: 200px;
     height: 200px;
     background-color: #eee;
     border-radius: 50%;
+    overflow: hidden;
     background-size: cover;
     margin: 50px auto;
     position: relative;
 }
+.mypage .mypage_wrap .left .main_img{
+   height: 100%;
+}
+
 .mypage .mypage_wrap .right{
     height: 400px;
     padding: 50px;
     position: relative;
     width: 70%;
     float: right;
+}
+.img{
+    width: 60px;
 }
 .mypage .mypage_wrap .right p{
     display: inline-block;
@@ -73,6 +81,12 @@
     text-align: center;
     font-weight: bold;
 }
+.mypage .mypage_wrap .right .up.delete{
+    right: 180px;
+}
+.mypage .mypage_wrap .right .up a{
+    color: #fff;
+}
 .mypage.update .mypage_wrap .left input{
     width: 200px;
     height: 30px;
@@ -80,7 +94,7 @@
     padding: 0;
     margin: 0 auto;
 }
-.mypage.update .mypage_wrap .left .main_img .add{
+.mypage .mypage_wrap .left .img_wrap .add{
     width: 50px;
     height: 50px;
     background-color: #999;
@@ -96,12 +110,13 @@
     border-radius: 50%;
     background-image: url('../images/camera.png');
 }
-.mypage.update .mypage_wrap .left .main_img .add label{
+.mypage.update .mypage_wrap .left .img_wrap .add label{
     width: 40px;
     height: 40px;
     cursor: pointer;
     display: block;
 }
+
 .mypage.update .mypage_wrap .left .upimg{
     display: none;
 }
@@ -116,8 +131,9 @@
     padding: 5px 10px;
     margin: 0 10px;
 }
-.mypage.update .mypage_wrap .right textarea{
+.mypage.update .mypage_wrap .right input{
     width: 300px;
     top: 10px;
+    display: inline-block;
     position: relative;
 }

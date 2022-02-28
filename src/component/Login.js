@@ -1,6 +1,6 @@
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import {GoogleAuthProvider} from 'firebase/auth'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth,firebaseInstance  } from './Firebase';
 import '../css/Login.css'
 
@@ -11,7 +11,11 @@ const Login = (props) => {
   const [EmailText,setEmailText]=useState(false)
   const [passwordCheck ,setPasswordCheck]=useState('')
   const [passwordText,setPasswordText]=useState(false)
-  
+  // useEffect(()=>{
+  // const user =  auth.currentUser;
+  // console.log(auth.currentUser)
+  //   console.log(user)
+  // },[])
   const onChange = (event) => {
     const {target: {name, value}} = event;
     if (name==='email') {
@@ -39,9 +43,7 @@ const Login = (props) => {
     event.preventDefault();
     try {
       let data;
-        // data = await firebaseInstance.auth().signInWithEmailAndPassword(email, password);
         data = await signInWithEmailAndPassword(auth,email, password);
-      console.log(data);
       props.LoginCheck(data)
       window.location.hash="/"
     } catch(error) {
@@ -54,15 +56,16 @@ const Login = (props) => {
     }
   }
 const GoJoin=()=>{
-  window.location.hash="/join"
+  window.location.hash="#/join"
 
 }
-
-  
   const onGoogleClick = async () => {
    const provider = new firebaseInstance.auth().GoogleAuthProvider(); // provider를 설정
   await firebaseInstance.auth().signInWithPopup(provider); // 
   }
+
+
+
   return (
     <div className='login'>
       <div className='login_wrap'>

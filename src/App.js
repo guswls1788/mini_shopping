@@ -6,23 +6,72 @@ import Login from './component/Login'
 import Join from './component/Join'
 import { useEffect, useState } from "react"
 import Mypage from './component/Mypage';
-import { auth, firebaseInstance } from './component/Firebase';
+import jquery from 'jquery';
+import $ from 'jquery';
+import { firestore ,auth, firebaseInstance } from './component/Firebase';
 // import LoginCheck from "./component/Logincheck"
 import useLocalStorage from "./useLocalStorage";
 
 function App(props,history) {
-  const [init, setInit] = useState(false);
-  const [login,setLogin]=useState(() => JSON.parse(window.localStorage.getItem("login")))
-  const [submenu,setSubmenu]=useState(false)
+  const [login,setLogin]=useState(false)
+  const [init,setInit]=useState(false)
   const [userEmail,setUserEmail]=useState('')
   const [userPass,setUserPass]=useState('')
   const [Logindata,setLogindata]=useState('')
+  const [imgFiles,setImgFiles]=useState('')
+  const [imgUrl,setImgUrl]=useState('')
+  const storage = firebaseInstance.storage();
+
+  useEffect(()=>{
+    $(document).ready(function(){
+      $(".user_img").click(function(){
+        $(".sub").toggleClass("show")
+      })
+    })
+  },[])
+  useEffect( async()=>{
+    await  auth.onAuthStateChanged((user) => {
+      if (user) {
+        upd()
+      setLogin(false)
+        const use=  firestore.collection("user")
+        use.doc(user.uid).get().then((doc)=>{
+        setLogindata(doc.data())
+      })
+    } else {
+      setLogin(true)
+      // User is signed out
+      // ...
+    }
+  });
+},[])
+  // useEffect(()=>{
+  //   const bucket = firestore.collection("user"); 
+  //   // console.log(firestore)
+  //   // console.log(bucket)
+  //   bucket.doc("user_user").get().then((doc) => {
+  //     // console.log(doc.data());
+  //     // console.log(doc.data().name);
+  //     // console.log(doc.id);
+  //     //게시판으로 쓸거임 db임
+  // });
+  //  })
+  
+  // useEffect(() => {
+  //   window.localStorage.setItem("login", JSON.stringify(login));
+  //   console.log(login   )
+  // }, [login]);
+  
   // const history = useHistory();
   const GotoLogin=()=>{
     window.location.hash="#/login"
   }
   const GotoMypage=()=>{
     window.location.hash="#/mypage"
+  }
+  const GoMain=()=>{
+    window.location.hash="/"
+
   }
 
   const Logout=()=>{
@@ -32,65 +81,50 @@ function App(props,history) {
       window.location.hash="/"
     }
   }
-  const submenuOpen=()=>{
-    setSubmenu(!submenu)
-  }   
-  const Loginok=()=>{
-    const [on,setOn]=useLocalStorage("on",false)
 
-  }
+
   const LoginCheck=(data)=>{
-    setLogindata(data.operationType)
-    setUserEmail(data.user.email)
       setLogin(!login)
-    console.log(login)
-    if(data.operationType==='signIn'){
-    firebaseInstance.onAuthStateChanged=(user)=> {
-      if (user) {
-        alert("dd")
-      }
-    }
-      // setLogin(!login)
-    }
+
   }
-  useEffect(() => {
-    window.localStorage.setItem("login", JSON.stringify(login));
-  console.log(login)
-}, [login]);
-useEffect(()=>{
-  const user = auth.currentUser;
-  console.log(user)
-if (user) {
-  // User is signed in, see docs for a list of available properties
-  // https://firebase.google.com/docs/reference/js/firebase.User
-  // ...
-} else {
-  // No user is signed in.
-}
-
-})
-
-
+  const DeletUser=()=>{
+    setLogin(!login)
+  }
+  const upd=async(imgUrl)=>{
+    await  auth.onAuthStateChanged((user) => {
+      if (user) {
+        try {
+            let url = '';
+            storage.ref().child('image/'+user.uid+"_main_img.jpg").getDownloadURL().then((url)=>{
+                setImgUrl(url)
+            })
+              return url;
+            } catch (e) {
+              console.log(e);
+            }
+    } else {
+    }
+  });
+  }
   
   return (
     <div className="app">
       <GlobalStyle/>
       <div className='header'>
         <div className='header_wrap'>
-          <div className='logo'><a href='/'></a></div>
+          <div className='logo' onClick={GoMain}></div>
           <div className='user'>
             <ul>
               {/* <li><LoginCheck/></li> */}
               <li className='cart'>장바구니</li>
               {login?
                <li onClick={GotoLogin} className='logintext'>로그인</li>:
-               <li className='user_img'><a onClick={submenuOpen}></a>
-               {submenu?
+               <li className='user_img'><a><img src={imgUrl}></img></a>
                  <ul className='sub'>
                    <li className='logintext'><a onClick={GotoMypage}>마이페이지</a></li>
                    <li className='logintext'>고객센터</li>
                    <li onClick={Logout} className='logintext'>로그아웃</li>
-                 </ul>:<></>}
+                 </ul>
                </li>}
             </ul>
           </div>
@@ -100,7 +134,7 @@ if (user) {
         <Routes>
           <Route exact path="/"  element={<Home/>} />
           <Route path="/login"  element={<Login LoginCheck={LoginCheck} />} />
-          <Route path="/mypage"  element={<Mypage LoginCheck={LoginCheck} userEmail={userEmail} userPass={userPass}/>} />
+          <Route path="/mypage"  element={<Mypage upd={upd} DeletUser={DeletUser} LoginCheck={LoginCheck} Logindata={Logindata} userEmail={userEmail} userPass={userPass}/>} />
           <Route path="/join"  element={<Join/>} />
         </Routes>
       </HashRouter>
