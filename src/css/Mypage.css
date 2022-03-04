@@ -56,7 +56,7 @@
     content: "";
     position: absolute;
     width: 2px;
-    background-color: salmon;
+    background-color: #6667ab;
     height: 100%;
     top: 0;
     left: 60px;
@@ -75,7 +75,7 @@
     width: 100px;
     height: 30px;
     border-radius: 5px;
-    background-color: salmon;
+    background-color: #6667ab;
     color: #fff;
     display: inline-block;
     text-align: center;

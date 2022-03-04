@@ -7,9 +7,9 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid"
 function Mypage(props) {
     const [update,setUpdate]=useState(true)
-    const [userName,setUserName]=useState(props.Logindata.name)
+    const [userName,setUserName]=useState('')
     const [imgFiles,setImgFiles]=useState('')
-    const [userComment,setUserComment]=useState(props.Logindata.comment)
+    const [userComment,setUserComment]=useState('')
     const auth = getAuth();
     const img_box=document.querySelector('.main_img')
     const reader =new FileReader()
@@ -17,15 +17,19 @@ function Mypage(props) {
     const storage = firebaseInstance.storage();
     var storageRef = storage.ref();
     const use=firestore.collection("user")
+    const dbService = firebaseInstance.firestore();
     
     useEffect( async()=>{
         await  auth.onAuthStateChanged((user) => {
-          if (user) {
+            if (user) {
+                const use=  firestore.collection("user")
+                use.doc(user.uid).get().then((doc)=>{
+                    setUserName(doc.data().name)
+                    setUserComment(doc.data().comment)
+
+              })
             try {
                 let url = '';
-                if('image/'+user.uid+"_main_img.jpg"==null){
-                    console.log("tjfaks")
-                }
                 storage.ref().child('image/'+user.uid+"_main_img.jpg").getDownloadURL().then((url)=>{
                     setImgUrl(url)
                 })
@@ -33,26 +37,19 @@ function Mypage(props) {
                 } catch (e) {
                   console.log(e);
                 }
-        } else {
         }
       });
-    })
+    },[])
 
     useEffect(()=>{
         preview()
         return()=>preview()
     })
     const UpImg=async()=>{
-        console.log(imgUrl)
         if(imgFiles[0]==undefined){
            return
         }else{
-            console.log("no")
-            var dd = storageRef.child('image/' + props.Logindata.user_uid+"_main_img.jpg");
-            console.log(dd)
-            console.log(imgFiles[0])
-            var aa = dd.put(imgFiles[0])
-            
+            var dd = await firebaseInstance.storage().ref().child('image/' + props.Logindata.user_uid+"_main_img.jpg").put(imgFiles[0])
         }
             
     }
@@ -65,7 +62,6 @@ function Mypage(props) {
             await use.doc(props.Logindata.user_uid).update({
                 name:userName,
             })
-            console.log(userName)
         }
          if(userComment){
             await use.doc(props.Logindata.user_uid).update({
@@ -73,8 +69,8 @@ function Mypage(props) {
             })
         }
         UpImg()
-        window.location.reload();
         props.upd(imgUrl)
+        // window.location.reload();
     }
 
     const updateImage=(e)=>{
@@ -94,7 +90,6 @@ function Mypage(props) {
         const deletImg=()=>{
             
             var desertRef = storageRef.child('image/' + props.Logindata.user_uid+"_main_img.jpg");
-            console.log(desertRef)
             // Delete the file
             desertRef.delete().then(function() {
                 console.log("succes")
@@ -105,22 +100,20 @@ function Mypage(props) {
             });
         }
         const DeletUser=()=>{
-            const us=auth.currentUser
-            console.log(us)
-              auth.onAuthStateChanged((user) => {
+                const us=auth.currentUser
                 if(window.confirm("정말 탈퇴하시겠습니까?")){
-                    us.delete().then(() => {
+                    dbService.collection('user').doc(us.uid).delete().then(()=>{
+                      console.log("db succes")
+                      us.delete().then(() => {
                         console.log("succes")
                         props.DeletUser()
                          window.location.hash="/"
                       }).catch((error) => {
                         console.log(error)
                       });
+                    })
                 }
-            });
-
-                
-                
+   
         }
     if(update===true){
         return (
@@ -128,11 +121,11 @@ function Mypage(props) {
                 <div className="mypage_wrap">
                     <div className="left">
                     <div className='img_wrap'><img src={imgUrl} className="main_img"></img></div>
-                        <p className="name">{props.Logindata.name}</p>
+                        <p className="name">{userName}</p>
                     </div>
                     <div className="right">
                         <p>이메일</p><span className="email">{props.Logindata.email}</span><br/>
-                        <p>한마디</p><span className="desc">{props.Logindata.comment}</span>
+                        <p>한마디</p><span className="desc">{userComment}</span>
                         <button onClick={Uupd} className="up">수정</button>
                     </div>
                 </div>
@@ -148,12 +141,12 @@ function Mypage(props) {
                         <div className="button_wrap">
                             <button onClick={deletImg}>삭제</button>
                         </div>
-                        <input defaultValue={props.Logindata.name} onChange={e=>setUserName(e.target.value)}></input>
+                        <input defaultValue={userName} onChange={e=>setUserName(e.target.value)}></input>
                     </div>
                     <div className="right">
                         <p>이메일</p><span className="email">{props.Logindata.email}</span><br/>
                         <p>한마디</p>
-                        <input onChange={e=>setUserComment(e.target.value)} defaultValue={props.Logindata.comment}></input>
+                        <input onChange={e=>setUserComment(e.target.value)} defaultValue={userComment}></input>
                         <button onClick={DeletUser}  className="up delete"><a>회원탈퇴</a></button>
                         <button onClick={upd}  className="up"><a>정보 수정</a></button>
                     </div>

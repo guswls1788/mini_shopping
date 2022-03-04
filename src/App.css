@@ -10,9 +10,12 @@
   margin: 0 auto;
 }
 .app .header .header_wrap .logo{
-  width: 100px;
+  width: 150px;
   height:40px;
   float: left;
+  background-size: cover;
+  cursor: pointer;
+  background-image: url('./images/LOGO.jpg');
   background-color: #999;
 }
 .app .header .header_wrap .logo a{

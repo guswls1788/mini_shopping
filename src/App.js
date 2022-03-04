@@ -4,6 +4,7 @@ import GlobalStyle from './component/GlobalStyle';
 import Home from './component/Home'
 import Login from './component/Login'
 import Join from './component/Join'
+import Cart from './component/Cart'
 import { useEffect, useState } from "react"
 import Mypage from './component/Mypage';
 import jquery from 'jquery';
@@ -70,8 +71,10 @@ function App(props,history) {
     window.location.hash="#/mypage"
   }
   const GoMain=()=>{
-    window.location.hash="/"
-
+        window.location.hash="/"
+  }
+  const GotoCart=()=>{
+    window.location.hash="#/cart"
   }
 
   const Logout=()=>{
@@ -116,13 +119,13 @@ function App(props,history) {
           <div className='user'>
             <ul>
               {/* <li><LoginCheck/></li> */}
-              <li className='cart'>장바구니</li>
+              <li onClick={GotoCart} className='cart'>장바구니</li>
               {login?
                <li onClick={GotoLogin} className='logintext'>로그인</li>:
                <li className='user_img'><a><img src={imgUrl}></img></a>
                  <ul className='sub'>
                    <li className='logintext'><a onClick={GotoMypage}>마이페이지</a></li>
-                   <li className='logintext'>고객센터</li>
+                   {/* <li className='logintext'>고객센터</li> */}
                    <li onClick={Logout} className='logintext'>로그아웃</li>
                  </ul>
                </li>}
@@ -136,6 +139,7 @@ function App(props,history) {
           <Route path="/login"  element={<Login LoginCheck={LoginCheck} />} />
           <Route path="/mypage"  element={<Mypage upd={upd} DeletUser={DeletUser} LoginCheck={LoginCheck} Logindata={Logindata} userEmail={userEmail} userPass={userPass}/>} />
           <Route path="/join"  element={<Join/>} />
+          <Route path="/cart"  element={<Cart/>} />
         </Routes>
       </HashRouter>
     </div>

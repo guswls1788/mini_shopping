@@ -26,7 +26,7 @@ function Join() {
                 email:email,
                 user_uid:user.user.uid
             });
-            alert("succes")
+            alert("가입에 성공했습니다.")
             window.location.hash="/"
             console.log(user);
         } catch (error) {
