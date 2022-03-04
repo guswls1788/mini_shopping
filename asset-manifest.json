@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/mini_shopping/static/css/main.842409f9.css",
-    "main.js": "/mini_shopping/static/js/main.afe0d358.js",
+    "main.css": "/mini_shopping/static/css/main.1dd15a71.css",
+    "main.js": "/mini_shopping/static/js/main.b4db9ac1.js",
     "static/js/787.28cb0dcd.chunk.js": "/mini_shopping/static/js/787.28cb0dcd.chunk.js",
+    "static/media/shoes-4973977_1920.jpg": "/mini_shopping/static/media/shoes-4973977_1920.63257505a44fbd59554a.jpg",
+    "static/media/shoes-4973976_1920.jpg": "/mini_shopping/static/media/shoes-4973976_1920.54e5eb8d20f2c5533cc9.jpg",
+    "static/media/pink-4973985_1920.jpg": "/mini_shopping/static/media/pink-4973985_1920.18333b0a02fcb5641006.jpg",
+    "static/media/white-4973980_1920.jpg": "/mini_shopping/static/media/white-4973980_1920.02b2b73ed8d5dab8bfe7.jpg",
     "static/media/camera.png": "/mini_shopping/static/media/camera.5cd5751725414afe6129.png",
     "index.html": "/mini_shopping/index.html",
-    "main.842409f9.css.map": "/mini_shopping/static/css/main.842409f9.css.map",
-    "main.afe0d358.js.map": "/mini_shopping/static/js/main.afe0d358.js.map",
+    "main.1dd15a71.css.map": "/mini_shopping/static/css/main.1dd15a71.css.map",
+    "main.b4db9ac1.js.map": "/mini_shopping/static/js/main.b4db9ac1.js.map",
     "787.28cb0dcd.chunk.js.map": "/mini_shopping/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.842409f9.css",
-    "static/js/main.afe0d358.js"
+    "static/css/main.1dd15a71.css",
+    "static/js/main.b4db9ac1.js"
   ]
 }
