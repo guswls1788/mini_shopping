@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mini_shopping/static/css/main.b6ccaf05.css",
-    "main.js": "/mini_shopping/static/js/main.cfcbc233.js",
+    "main.js": "/mini_shopping/static/js/main.0b3a5441.js",
     "static/js/787.28cb0dcd.chunk.js": "/mini_shopping/static/js/787.28cb0dcd.chunk.js",
     "static/media/shoes-4973977_1920.jpg": "/mini_shopping/static/media/shoes-4973977_1920.63257505a44fbd59554a.jpg",
     "static/media/shoes-4973976_1920.jpg": "/mini_shopping/static/media/shoes-4973976_1920.54e5eb8d20f2c5533cc9.jpg",
@@ -12,11 +12,11 @@
     "static/media/camera.png": "/mini_shopping/static/media/camera.5cd5751725414afe6129.png",
     "index.html": "/mini_shopping/index.html",
     "main.b6ccaf05.css.map": "/mini_shopping/static/css/main.b6ccaf05.css.map",
-    "main.cfcbc233.js.map": "/mini_shopping/static/js/main.cfcbc233.js.map",
+    "main.0b3a5441.js.map": "/mini_shopping/static/js/main.0b3a5441.js.map",
     "787.28cb0dcd.chunk.js.map": "/mini_shopping/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b6ccaf05.css",
-    "static/js/main.cfcbc233.js"
+    "static/js/main.0b3a5441.js"
   ]
 }
